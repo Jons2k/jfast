@@ -1,0 +1,49 @@
+<fieldset class="table-search-fieldset">
+	<legend>搜索信息</legend>
+	<div style="margin: 10px 10px 10px 10px">
+		<form class="layui-form layui-form-pane" action="" id="searchForm"
+			lay-filter="searchForm">
+			<div class="layui-form-item">
+			#for(f : fields)
+		         #if(f.type == 'text')
+		            #continue
+		        #else if(f.type == 'file')
+		            #continue
+		        #else if(f.type == 'date')
+		            #continue
+		        #else if(f.type == 'datetime')
+		            #continue
+		        #else if(f.type == 'dict')    
+		        <div class="layui-inline">
+					<label class="layui-form-label">#(f.title)</label>
+					<div class="layui-input-inline">
+        				<select name="#(f.code)" id="#(f.code)" url="#(SHARP)(CONTEXT)sys/dict/select?dict=#(f.param)" idField="code" lay-filter="#(f.code)"></select>					
+					</div>
+				</div> 
+		        #else if(f.type == 'relation')    
+		        <div class="layui-inline">
+					<label class="layui-form-label">#(f.title)</label>
+					<div class="layui-input-inline">
+        				<select name="#(f.code)" id="#(f.code)" url="#(SHARP)(CONTEXT)#(f.param)/slist" lay-filter="#(f.code)" lay-search></select>					
+					</div>
+				</div>        
+		        #else  
+		        <div class="layui-inline">
+					<label class="layui-form-label">#(f.title)</label>
+					<div class="layui-input-inline">
+						<input type="text" name="#(f.code)" id="#(f.code)" autocomplete="off" class="layui-input">
+					</div>
+				</div> 
+		    	#end
+		    #end
+				<div class="layui-inline">
+					<button type="submit" class="layui-btn layui-btn-primary"
+						lay-submit lay-filter="data-search-btn">
+						<i class="layui-icon"></i> 搜 索
+					</button>
+      				<button type="reset" class="layui-btn layui-btn-primary">清空</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</fieldset>

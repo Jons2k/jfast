@@ -1,0 +1,32 @@
+
+   	<div class="layui-form-item">
+        <label class="layui-form-label ">模块</label>
+        <div class="layui-input-inline">
+        	<select name="moduleId" id="moduleId" url="#(CONTEXT)dev/module/slist" lay-filter="moduleId" affect="#modelId" lay-verify="required" lay-reqtext="所属模块不能为空" ></select>
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label ">业务模型</label>
+        <div class="layui-input-inline">						
+        	<select name="modelId" id="modelId" url="#(CONTEXT)dev/models/slist" depend="#moduleId" lay-filter="modelId" lay-verify="required" lay-reqtext="业务模型不能为空" ></select>
+		</div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">操作地址</label>
+        <div class="layui-input-block">
+            <input type="text" name="url" lay-filter="url" lay-verify="required" lay-reqtext="操作地址不能为空" maxlength="255"  placeholder="请输入操作地址"
+ class="layui-input" id="url">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">操作名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" lay-filter="title" lay-verify="required" lay-reqtext="操作名称不能为空" maxlength="50"  placeholder="请输入操作名称"
+ class="layui-input" id="title">
+        </div>
+    </div>
+    <div class="layui-hide">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="submitBtn" id="submitBtn">确认保存</button>
+        </div>
+    </div>

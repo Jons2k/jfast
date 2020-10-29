@@ -1,0 +1,53 @@
+<fieldset class="table-search-fieldset">
+	<legend>搜索信息</legend>
+	<div style="margin: 10px 10px 10px 10px">
+		<form class="layui-form layui-form-pane" action="" id="searchForm"
+			lay-filter="searchForm">
+			<div class="layui-form-item">
+		        <div class="layui-inline">
+					<label class="layui-form-label">账号</label>
+					<div class="layui-input-inline">
+						<input type="text" name="account" id="account" autocomplete="off" class="layui-input">
+					</div>
+				</div> 
+		        <div class="layui-inline">
+					<label class="layui-form-label">邮箱</label>
+					<div class="layui-input-inline">
+						<input type="text" name="email" id="email" autocomplete="off" class="layui-input">
+					</div>
+				</div> 
+		        <div class="layui-inline">
+					<label class="layui-form-label">手机号</label>
+					<div class="layui-input-inline">
+						<input type="text" name="phone" id="phone" autocomplete="off" class="layui-input">
+					</div>
+				</div> 
+		        <div class="layui-inline">
+					<label class="layui-form-label">昵称</label>
+					<div class="layui-input-inline">
+						<input type="text" name="nickname" id="nickname" autocomplete="off" class="layui-input">
+					</div>
+				</div>       
+		        <div class="layui-inline">
+					<label class="layui-form-label">所在部门</label>
+					<div class="layui-input-inline">
+        				<select name="departId" id="departId" url="#(CONTEXT)sys/department/select" lay-filter="departId" lay-search></select>					
+					</div>
+				</div>        
+		        <div class="layui-inline">
+					<label class="layui-form-label">状态</label>
+					<div class="layui-input-inline">
+						<select name="status" id="status" url="#(CONTEXT)sys/dict/select?dict=status" idField="code" lay-filter="status"></select>					
+					</div>
+				</div> 
+				<div class="layui-inline">
+					<button type="submit" class="layui-btn layui-btn-primary"
+						lay-submit lay-filter="data-search-btn">
+						<i class="layui-icon"></i> 搜 索
+					</button>
+      				<button type="reset" class="layui-btn layui-btn-primary">清空</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</fieldset>

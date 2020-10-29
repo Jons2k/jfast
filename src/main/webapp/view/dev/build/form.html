@@ -1,0 +1,38 @@
+#define attr(f)
+name="#(f.code)" lay-filter="#(f.code)" id="#(f.code)" #if(f.nullable == '0')lay-verify="required" lay-reqtext="#(f.title)不能为空" #end #if(f.len >0) maxlength="#(f.len)" #end  placeholder="请输入#(f.title)"
+#end
+
+	#for(f : fields)
+   	<div class="layui-form-item">
+        <label class="layui-form-label #if(f.nullable == '0') required #end">#(f.title)</label>
+         #if(f.type == 'text')
+        <div class="layui-input-block">
+        #else
+        <div class="layui-input-inline">        
+        #end
+         #if(f.type == 'text')
+            <textarea  cols="100" rows="3" #@attr(f) class="layui-textarea" id="#(f.code)"></textarea>
+        #else if(f.type == 'file')
+        		<input type="hidden" name="#(f.code)" id="#(f.code)_id"> 
+	            <input type="text" name="#(f.code)_name" id="#(f.code)" file="image" readonly placeholder="请选择文件" class="layui-input" #if(f.nullable == '0')lay-verify="required" lay-reqtext="#(f.title)不能为空" #end>
+        #else if(f.type == 'date')
+                <input type="text" #@attr(f) class="layui-input" readonly date="date" >
+        #else if(f.type == 'datetime')
+                <input type="text" #@attr(f) class="layui-input" readonly date="datetime" >
+        #else if(f.type == 'number')            
+        	<input type="number" #@attr(f) #if(f.scale != null) step="#(f.scale)" #end class="layui-input">
+        #else if(f.type == 'dict')    
+            <select id="#(f.code)" name="#(f.code)" url="#(SHARP)(CONTEXT)sys/dict/select?dict=#(f.param)" idField="code" lay-filter="#(f.code)" #if(f.nullable == '0')lay-verify="required" lay-reqtext="#(f.title)不能为空" #end></select>					
+        #else if(f.type == 'relation')    
+            <select id="#(f.code)" name="#(f.code)" url="#(SHARP)(CONTEXT)#(f.param)/slist" lay-filter="#(f.code)" lay-search #if(f.nullable == '0')lay-verify="required" lay-reqtext="#(f.title)不能为空" #end></select>					
+        #else  
+            <input type="text" #@attr(f) class="layui-input">
+    	#end
+        </div>
+    </div>
+    #end
+    <div class="layui-hide">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="submitBtn" id="submitBtn">确认保存</button>
+        </div>
+    </div>

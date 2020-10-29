@@ -1,0 +1,59 @@
+
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">所属应用</label>
+        <div class="layui-input-inline">
+        	<select name="appId" id="appId" url="#(CONTEXT)sys/application/slist" affect="#pid" lay-filter="appId" lay-verify="required" lay-reqtext="所属应用不能为空" ></select>					
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">上级菜单</label>
+        <div class="layui-input-inline">						
+        	<select name="pid" id="pid" url="#(CONTEXT)sys/menu/groups" depend="#appId" lay-filter="pid"></select>		
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">菜单分类</label>
+        <div class="layui-input-inline">
+        	<select name="type" id="type" url="#(CONTEXT)sys/dict/select?dict=menu_type" value="1" idField="code" lay-filter="type" lay-verify="required" lay-reqtext="菜单分类不能为空" ></select>					
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">菜单地址</label>
+        <div class="layui-input-inline">
+            <input type="text" name="url" lay-filter="url" lay-verify="required" lay-reqtext="菜单地址不能为空" maxlength="255"  placeholder="请输入菜单地址"
+ class="layui-input" id="url">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">菜单标题</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" lay-filter="title" lay-verify="required" lay-reqtext="菜单标题不能为空" maxlength="50"  placeholder="请输入菜单标题"
+ class="layui-input" id="title">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">状态</label>
+        <div class="layui-input-inline">
+        	<select name="status" id="status" #if(_action == "add") value="1" #end url="#(CONTEXT)sys/dict/select?dict=status" idField="code" lay-filter="status" lay-verify="required" lay-reqtext="状态不能为空" ></select>
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">排序</label>
+        <div class="layui-input-inline">
+        	<input type="number" name="listSort" lay-filter="listSort" lay-verify="required" lay-reqtext="排序不能为空" maxlength="10"  placeholder="请输入排序"
+  step="0" class="layui-input" id="listSort">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label ">图标</label>
+        <div class="layui-input-inline">
+            <input type="text" name="icon" lay-filter="icon" maxlength="20"  placeholder="请输入图标"
+ class="layui-input" id="icon">
+        </div>    	
+        <div class="layui-form-mid layui-word-aux"><a href="#(STATICS)page/icon.html" target="_blank">可用图标</a></div>
+    </div>
+    <div class="layui-hide">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="submitBtn" id="submitBtn">确认保存</button>
+        </div>
+    </div>

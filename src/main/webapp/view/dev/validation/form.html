@@ -1,0 +1,46 @@
+
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">规则名称</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" lay-filter="title" lay-verify="required" lay-reqtext="规则名称不能为空"  maxlength="50"  placeholder="请输入规则名称"
+ class="layui-input" id="title">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">模块</label>
+            <div class="layui-input-inline">
+           		<select name="moduleId" id="moduleId" url="#(CONTEXT)dev/module/slist" lay-filter="moduleId" affect="#modelId" lay-search></select>
+            </div>
+        </div>
+        <div class="layui-inline">
+	        <label class="layui-form-label  required ">所属模型</label>
+	        <div class="layui-input-inline">
+	            <select id="modelId" name="modelId" url="#(CONTEXT)dev/models/slist" depend="#moduleId" affect="#fieldId" lay-filter="modelId" lay-verify="required" lay-reqtext="验证规则不能为空"  lay-search></select>					
+	        </div>
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">字段</label>
+        <div class="layui-input-inline">
+            <select id="fieldId" name="fieldId" url="#(CONTEXT)dev/field/slist" depend="#modelId" lay-filter="fieldId" lay-verify="required" lay-reqtext="验证规则不能为空"  lay-search></select>					
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">验证类型</label>
+        <div class="layui-input-inline">
+            <select id="type" name="type" url="#(CONTEXT)sys/dict/select?dict=validation_type" idField="code" lay-filter="type" lay-verify="required" lay-reqtext="验证规则不能为空" ></select>					
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">验证规则</label>
+        <div class="layui-input-block">
+            <input type="text" name="rule" lay-filter="rule" maxlength="200"  placeholder="请输入验证规则"
+ class="layui-input" id="rule">
+        </div>
+    </div>
+    <div class="layui-hide">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="submitBtn" id="submitBtn">确认保存</button>
+        </div>
+    </div>

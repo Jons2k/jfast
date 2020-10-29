@@ -1,0 +1,25 @@
+#define layout()
+<!DOCTYPE html>
+<html>
+<head>
+	<title>#(_config.title??)</title>
+	#include("/view/include/inc.html")
+    #@css?()
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+    
+    	#@main()
+    
+    	<table class="layui-hide" id="listTable" lay-filter="listTable"></table>        
+    </div>
+</div>
+<script src="#(STATICS)lib/layui-v2.5.5/layui.js?v=#(VERSION)" charset="utf-8"></script>
+<script src="#(STATICS)js/lay-config.js?v=#(VERSION)" charset="utf-8"></script>
+<script src="#(CONTEXT)sys/dict/format?v=#(VERSION)" charset="utf-8"></script>
+#@js?()
+#@script()
+</body>
+</html>
+#end

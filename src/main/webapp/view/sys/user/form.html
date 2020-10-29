@@ -1,0 +1,46 @@
+
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">账号</label>
+        <div class="layui-input-inline">
+            <input type="text" name="account" lay-filter="account" lay-verify="required" lay-reqtext="账号不能为空" min-length="2" maxlength="50"  placeholder="请输入账号"
+ class="layui-input" id="account">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label ">邮箱</label>
+        <div class="layui-input-inline">
+            <input type="email" name="email" lay-filter="email" maxlength="50"  placeholder="请输入邮箱"
+ class="layui-input" id="email">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label ">手机号</label>
+        <div class="layui-input-inline">
+            <input type="text" name="phone" lay-filter="phone" minlength="11" maxlength="30"  placeholder="请输入手机号"
+ class="layui-input" id="phone">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">昵称</label>
+        <div class="layui-input-inline">
+            <input type="text" name="nickname" lay-filter="nickname" lay-verify="required" lay-reqtext="昵称不能为空" maxlength="100"  placeholder="请输入昵称"
+ class="layui-input" id="nickname">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label ">所在部门</label>
+        <div class="layui-input-inline">						
+        	<select name="departId" id="departId" url="#(CONTEXT)sys/department/select" lay-filter="departId"></select>					
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">状态</label>
+        <div class="layui-input-inline">
+            <select name="status" id="status" #if(_action == "add") value="1" #end url="#(CONTEXT)sys/dict/select?dict=status" idField="code" lay-filter="status" lay-verify="required" lay-reqtext="状态不能为空" ></select>
+		</div>
+    </div>
+    <div class="layui-hide">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="submitBtn" id="submitBtn">确认保存</button>
+        </div>
+    </div>

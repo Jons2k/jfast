@@ -1,0 +1,44 @@
+<fieldset class="table-search-fieldset">
+	<legend id="legends">编辑信息</legend>
+	<div style="margin: 10px 10px 10px 10px">
+		<form class="layui-form layui-form-pane" action="#(CONTEXT)#(_module)/#(_controller)/update" id="innerForm"
+			lay-filter="innerForm">
+			<input type="hidden" name="id" />
+			<input type="hidden" name="type" />
+			<div class="layui-form-item">
+		        <div class="layui-inline">
+					<label class="layui-form-label">上级</label>
+					<div class="layui-input-inline">
+						<select name="pid" id="pid" url="#(CONTEXT)sys/dict/category" lay-filter="pid"></select>
+					</div>
+				</div> 
+		        <div class="layui-inline">
+					<label class="layui-form-label">代码</label>
+					<div class="layui-input-inline">
+						<input type="text" name="code" id="code" autocomplete="off" class="layui-input">
+					</div>
+				</div> 
+		        <div class="layui-inline">
+					<label class="layui-form-label">文本</label>
+					<div class="layui-input-inline">
+						<input type="text" name="title" id="title" autocomplete="off" class="layui-input">
+					</div>
+				</div> 
+		        <div class="layui-inline">
+			        <label class="layui-form-label  required ">排序</label>
+			        <div class="layui-input-block">
+			            <input type="number" name="listSort" lay-filter="listSort" lay-verify="required" lay-reqtext="排序不能为空" max="9999" placeholder="请输入文本"
+			 class="layui-input" id="listSort">
+			        </div>
+				</div> 
+				<div class="layui-inline">
+					<button type="submit" class="layui-btn layui-btn-primary"
+						lay-submit lay-filter="inner">
+						<i class="layui-icon"></i> 保存
+					</button>
+      				<button type="reset" class="layui-btn layui-btn-primary">清空</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</fieldset>

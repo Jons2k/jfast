@@ -1,0 +1,39 @@
+#include("/view/include/form.html")
+#@layout()
+
+#define main()
+
+	<div class="layui-tab layuimini-container">
+	  <ul class="layui-tab-title">
+	  #for(m : modules)
+	    <li #(for.first ? "class=\"layui-this\"" : "")>#(m.title)</li>
+	  #end
+	  </ul>
+	  <div class="layui-tab-content">
+	  
+	  #for(m : modules)
+	    <div class="layui-tab-item #(for.first ? "layui-show" : "")">	    
+		  	#for(mm:models)
+		  		#if( mm.moduleId == m.id)
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">#(mm.title)</label>
+			    <div class="layui-input-block">
+					#for(a:actions)
+					  	#if( a.modelId == mm.id)
+					<input type="checkbox" name="action[#(a.id)]" title="#(a.title)" #for(s:list) #if(s.id == a.id) checked #end #end>
+					     #end
+					#end
+			    </div>
+			  </div>
+  			  	#end
+  			#end
+	    </div>
+	  #end
+	  </div>
+	</div>
+    <div class="layui-hide">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="submitBtn" id="submitBtn">确认保存</button>
+        </div>
+    </div>
+#end

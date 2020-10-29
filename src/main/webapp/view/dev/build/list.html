@@ -1,0 +1,63 @@
+#(SHARP)include("/view/include/list.html")
+#(SHARP)@layout()
+
+#(SHARP)define main()
+	#(SHARP)include("filter.html")
+	<script type="text/html" id="toolbar">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-sm" lay-event="form" url="add.html"> 添加 </button>
+            <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="ajax_select" url="delete"> 删除选择 </button>
+        </div>
+    </script>
+	<script type="text/html" id="tool">
+        <a class="layui-btn layui-btn-xs " lay-event="form" url="edit.html">编辑</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="ajax" url="delete">删除</a>
+    </script>
+    #for(f : fields)
+    	#if(f.type == 'file')    	
+	<script type="text/html" id="#(f.code)_file">
+        <a class="layui-btn layui-btn-xs " lay-event="view" url="#(SHARP)(CONTEXT)/sys/file/view.html?fileId={{ d.#(f.code) }}">文件</a>
+    </script>
+    	#elseif(f.type == 'dict')    	
+	<script type="text/html" id="tpl_#(f.code)">
+		{{= dict_#(f.param)(d.#(f.code)) }}
+    </script>
+    	#end
+    #end
+
+#(SHARP)end
+
+#(SHARP)define script()
+<script>
+    layui.use(['curd'], function () {
+        var $ = layui.jquery,
+            curd = layui.curd,
+            layuimini = layui.layuimini;
+        #if(model.type == 't')
+            var listTable = curd.tree({
+                elem: '#(SHARP)listTable',
+                url: '#(SHARP)(CONTEXT)#(SHARP)(_module)/#(SHARP)(_controller)/slist',
+        #else
+            var listTable = curd.init({
+                elem: '#(SHARP)listTable',
+                url: '#(SHARP)(CONTEXT)#(SHARP)(_module)/#(SHARP)(_controller)/lists',
+        #end
+            cols: [[
+                {type: "checkbox", width: 50, fixed: "left"},
+                #for(f : fields)
+                	#if(f.type == 'text')
+                		#continue
+                    #else if(f.type == 'file')
+                {field: '#(f.code)', minWidth: 200, title: '#(f.title)', templet: '#(SHARP)#(f.code)_file'},
+                    #else if(f.type == 'dict')
+                {field: '#(f.code)', minWidth: 200, title: '#(f.title)', templet: '#(SHARP)tpl_#(f.code)'},
+                    #else
+                {field: '#(f.code)', minWidth: 200, title: '#(f.title)'},
+                	#end
+                #end
+                {title: '操作', width: 150, templet: '#(SHARP)tool', fixed: "right", align: "center"}
+            ]]
+        });
+    });      
+</script>
+#(SHARP)end

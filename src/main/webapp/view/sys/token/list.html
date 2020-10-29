@@ -1,0 +1,55 @@
+#include("/view/include/list.html")
+#@layout()
+
+#define main()
+	#include("filter.html")
+	<script type="text/html" id="toolbar">
+        <div class="layui-btn-container">
+			<!--
+            <button class="layui-btn layui-btn-sm" lay-event="form" url="add.html"> 添加 </button>
+			-->
+            <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="ajax_select" url="delete"> 删除选择 </button>
+        </div>
+    </script>
+	<script type="text/html" id="tool">
+			<!--
+        <a class="layui-btn layui-btn-xs " lay-event="form" url="edit.html">编辑</a>
+			-->
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="ajax" url="delete">删除</a>
+    </script>
+		<script type="text/html" id="tpl_client">
+        	{{#(SHARP) if(d.app){ }}
+				{{= d.app.title }}
+        	{{#(SHARP) } }}
+    	</script>
+		<script type="text/html" id="tpl_user">
+        	{{#(SHARP) if(d.user){ }}
+				{{= d.user.nickname }}
+        	{{#(SHARP) } }}
+    	</script>
+
+#end
+
+#define script()
+<script>
+    layui.use(['curd'], function () {
+        var $ = layui.jquery,
+            curd = layui.curd,
+            layuimini = layui.layuimini;
+            var listTable = curd.init({
+            elem: '#listTable',
+            url: '#(CONTEXT)#(_module)/#(_controller)/lists',
+            cols: [[
+                {type: "checkbox", width: 50, fixed: "left"},
+                {field: 'code', minWidth: 150, title: '代码'},
+                {field: 'userId', minWidth: 150, title: '用户', templet: '#tpl_user'},
+                {field: 'clientId', minWidth: 200, title: '应用', templet: '#tpl_app'},
+                {field: 'ip', minWidth: 200, title: 'IP地址'},
+                {field: 'createTime', minWidth: 150, title: '创建时间'},
+                {field: 'expireTime', minWidth: 150, title: '过期时间'},
+                {title: '操作', width: 100, templet: '#tool', fixed: "right", align: "center"}
+            ]]
+        });
+    });      
+</script>
+#end

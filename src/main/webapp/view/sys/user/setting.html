@@ -1,0 +1,63 @@
+#include("/view/include/single.html")
+#@layout()
+
+#define main()
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">账号</label>
+        <div class="layui-input-inline">
+            <input type="text" name="account" lay-filter="account" lay-verify="required" lay-reqtext="账号不能为空" min-length="2" maxlength="50"  placeholder="请输入账号"
+ class="layui-input" id="account" value="#(_user.account)" readonly>
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label ">邮箱</label>
+        <div class="layui-input-inline">
+            <input type="email" name="email" lay-filter="email" maxlength="50"  placeholder="请输入邮箱"
+ class="layui-input" id="email" value="#(_user.email)">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label ">手机号</label>
+        <div class="layui-input-inline">
+            <input type="text" name="phone" lay-filter="phone" minlength="11" maxlength="30"  placeholder="请输入手机号"
+ class="layui-input" id="phone" value="#(_user.phone)">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">昵称</label>
+        <div class="layui-input-inline">
+            <input type="text" name="nickname" lay-filter="nickname" lay-verify="required" lay-reqtext="昵称不能为空" maxlength="100"  placeholder="请输入昵称"
+ class="layui-input" id="nickname" value="#(_user.nickname)">
+        </div>
+    </div>
+#end
+
+
+#define script()
+<script>
+    layui.use(['form', 'curd'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            curd = layui.curd,
+            $ = layui.$;
+        
+        //监听提交
+        form.on('submit(submitBtn)', function (data) {
+        	$.post($(data.form).attr('action'), data.field,function(res){
+        		if(res.code == '0'){
+        			layer.msg(res.msg,function (index) {    					
+    	                layer.close(index); // 关闭弹出层        	                
+                    });
+    			}else{
+    				layer.msg(res.msg,function (index) {    
+      	      			if(res.url) window.location = res.url;					
+    	                layer.close(index); // 关闭弹出层
+                    });
+    			}
+        	});
+
+            return false;
+        });
+    });
+</script>
+#end

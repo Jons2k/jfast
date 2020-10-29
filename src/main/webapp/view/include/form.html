@@ -1,0 +1,105 @@
+#define layout()
+<!DOCTYPE html>
+<html>
+<head>
+    <title>layui</title>
+	#include("/view/include/inc.html")
+    #@css?()
+</head>
+<body>
+<div class="layui-container">  
+  <div class="layui-row">
+    <div class="layui-col-md12 layui-col-lg8 layui-col-lg-offset2">
+<div class="layui-form layuimini-form">
+	#if(_action == "edit")
+	<form class="layui-form" action="#(CONTEXT)#(_module)/#(_controller)/update" id="pageForm" lay-filter='pageForm'>
+	<input type="hidden" name="id" value="#(id)" />
+	#else if(_action == "add")
+	<form class="layui-form" action="#(CONTEXT)#(_module)/#(_controller)/save" id="pageForm" lay-filter='pageForm'>
+	#else
+	<form class="layui-form" action="#(CONTEXT)#(_module)/#(_controller)/#(_action)" id="pageForm" lay-filter='pageForm'>
+	<input type="hidden" name="id" value="#(id)" />
+	#end
+	
+    #@main()
+    
+	</form>
+</div>
+    </div>
+  </div>
+  </div>
+<script src="#(STATICS)lib/layui-v2.5.5/layui.js?v=#(VERSION)" charset="utf-8"></script>
+<script src="#(STATICS)js/lay-config.js?v=#(VERSION)" charset="utf-8"></script>
+#@js?()
+#@script()
+</body>
+</html>
+#end
+
+
+#define script()
+<script>
+    layui.use(['form', 'curd', 'element'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            curd = layui.curd,
+            $ = layui.$;
+
+        curd.initForm('#pageForm');
+        
+        //监听提交
+        form.on('submit(submitBtn)', function (data) {
+        	if(window.onSubmit){
+        		window.onSubmit(data.field);
+        	}else{
+        		$.post($(data.form).attr('action'), data.field,function(res){
+            		if(res.code == '0'){
+            			layer.msg(res.msg,function (index) {    					
+        	                layer.close(index); // 关闭弹出层
+
+        	                parent.actionSuccess();
+        	                
+        	                //关闭窗口
+        	                var iframeIndex = parent.layer.getFrameIndex(window.name);
+        	                parent.layer.close(iframeIndex);
+        	                
+                        });
+        			}else{
+        				layer.msg(res.msg,function (index) {    
+          	      			if(res.url) window.location = res.url;					
+        	                layer.close(index); // 关闭弹出层
+                        });
+        			}
+            	});
+        	}
+
+            return false;
+        });
+    	#if(_action != "add" && id != null)
+    		$.get("#(CONTEXT)#(_module)/#(_controller)/info?id=#(id)",function(res){
+    			if(res.code == '0'){
+    				form.val('pageForm', res.data);
+    				if(window.formVal){
+    					window.formVal(res.data);
+    				}
+    				form.render();
+    				
+    				//初始化编辑器
+    				curd.initEditor();
+    			}else{
+    				layer.msg(res.msg,function (index) {    					
+    	                layer.close(index); // 关闭弹出层
+    	                
+    	                //关闭窗口
+    	                var iframeIndex = parent.layer.getFrameIndex(window.name);
+    	                parent.layer.close(iframeIndex);
+                    });
+    			}
+    		});
+    	#else
+    		//初始化编辑器
+			curd.initEditor();
+    	#end
+    });
+</script>
+#end

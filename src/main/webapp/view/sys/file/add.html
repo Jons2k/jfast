@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jfast</title>
+	#include("/view/include/inc.html")
+</head>
+<body>
+<div class="layui-container">  
+  <div class="layui-row">
+    <div class="layui-col-md12 layui-col-lg8 layui-col-lg-offset2">
+	<div class="layui-form layuimini-form">
+	<form class="layui-form" action="#(CONTEXT)#(_module)/#(_controller)/update" id="pageForm" lay-filter='pageForm'>
+	   	<div class="layui-form-item">
+        	<label class="layui-form-label  required ">上传演示</label>
+        	<div class="layui-input-block">           
+	    		<input type="hidden" name="imageId"  id="image_id"> 
+	            <input type="text" name="imageName" id="image" file="file"  readonly placeholder="请选择文件" class="layui-input">
+	        </div>
+    	</div>
+    </form>
+</div>
+    </div>
+  </div>
+  </div>
+<script src="#(STATICS)lib/layui-v2.5.5/layui.js?v=#(VERSION)" charset="utf-8"></script>
+<script src="#(STATICS)js/lay-config.js?v=#(VERSION)" charset="utf-8"></script>
+<script>
+    layui.use(['form', 'curd'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            curd = layui.curd,
+            $ = layui.$;
+
+        curd.initForm('#pageForm');
+        
+       
+    });
+</script>
+</body>
+</html>

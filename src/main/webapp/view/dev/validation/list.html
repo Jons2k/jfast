@@ -1,0 +1,53 @@
+#include("/view/include/list.html")
+#@layout()
+
+#define main()
+	#include("filter.html")
+	<script type="text/html" id="toolbar">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-sm" lay-event="form" url="add.html"> 添加 </button>
+            <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="ajax_select" url="delete"> 删除选择 </button>
+        </div>
+    </script>
+	<script type="text/html" id="tool">
+        <a class="layui-btn layui-btn-xs " lay-event="form" url="edit.html">编辑</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="ajax" url="delete">删除</a>
+    </script>
+	<script type="text/html" id="tpl_type">
+		{{= dict_validation_type(d.type) }}
+    </script>
+		<script type="text/html" id="tpl_model">
+        	{{#(SHARP)  if(d.model){ }}
+    			{{ d.model.title }}
+  			{{#(SHARP)  } }} 
+    	</script>
+		<script type="text/html" id="tpl_field">
+        	{{#(SHARP)  if(d.field){ }}
+    			{{ d.field.title }}
+  			{{#(SHARP)  } }} 
+    	</script>
+
+#end
+
+#define script()
+<script>
+    layui.use(['curd'], function () {
+        var $ = layui.jquery,
+            curd = layui.curd,
+            layuimini = layui.layuimini;
+            var listTable = curd.init({
+            elem: '#listTable',
+            url: '#(CONTEXT)#(_module)/#(_controller)/lists',
+            cols: [[
+                {type: "checkbox", width: 50, fixed: "left"},
+                {field: 'title', minWidth: 200, title: '规则名称'},
+                {field: 'modelId', minWidth: 200, title: '所属模型', templet: '#tpl_model'},
+                {field: 'fieldId', minWidth: 200, title: '字段', templet: '#tpl_field'},
+                {field: 'type', minWidth: 200, title: '验证类型', templet: '#tpl_type'},
+                {field: 'rule', minWidth: 200, title: '验证规则'},
+                {title: '操作', width: 150, templet: '#tool', fixed: "right", align: "center"}
+            ]]
+        });
+    });      
+</script>
+#end

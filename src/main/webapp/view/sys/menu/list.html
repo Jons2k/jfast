@@ -1,0 +1,57 @@
+#include("/view/include/list.html")
+#@layout()
+
+#define main()
+	#include("filter.html")
+	<script type="text/html" id="toolbar">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-sm" lay-event="form" url="add.html"> 添加 </button>
+            <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="ajax_select" url="delete"> 删除选择 </button>
+        </div>
+    </script>
+	<script type="text/html" id="tool">
+        <a class="layui-btn layui-btn-xs " lay-event="form" url="edit.html">编辑</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="ajax" url="delete">删除</a>
+        {{#(SHARP) if(d.type != '0'){ }}
+        <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="form" url="action">行为</a>
+        {{#(SHARP) } }}
+
+    </script>
+		<script type="text/html" id="tpl_status">
+        	{{= dict_status(d.status) }}
+    	</script>
+		<script type="text/html" id="tpl_type">
+        	{{= dict_menu_type(d.type) }}
+    	</script>
+		<script type="text/html" id="tpl_app">
+        	{{#(SHARP) if(d.app){ }}
+				{{= d.app.title }}
+        	{{#(SHARP) } }}
+    	</script>
+
+#end
+
+#define script()
+<script>
+    layui.use(['curd'], function () {
+        var $ = layui.jquery,
+            curd = layui.curd,
+            layuimini = layui.layuimini;
+        var listTable = curd.tree({
+            elem: '#listTable',
+            url: '#(CONTEXT)#(_module)/#(_controller)/slist',
+            cols: [[
+                {type: "checkbox", width: 50, fixed: "left"},
+                {field: 'title', minWidth: 200, title: '菜单标题'},
+                {field: 'appId', minWidth: 200, title: '所属应用', templet: '#tpl_app'},
+                {field: 'type', minWidth: 200, title: '菜单分类', templet: '#tpl_type'},
+                {field: 'url', minWidth: 200, title: '菜单地址'},
+                {field: 'status', minWidth: 100, title: '状态', templet: '#tpl_status'},
+                {field: 'listSort', minWidth: 100, title: '排序'},
+                {field: 'icon', minWidth: 100, title: '图标'},
+                {title: '操作', width: 200, templet: '#tool', fixed: "right", align: "center"}
+            ]]
+        });
+    });      
+</script>
+#end

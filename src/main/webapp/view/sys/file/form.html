@@ -1,0 +1,83 @@
+
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">文件名</label>
+        <div class="layui-input-block">
+            <input type="text" name="name" lay-filter="name" lay-verify="required" lay-reqtext="文件名不能为空" maxlength="200"  placeholder="请输入文件名"
+ class="layui-input" id="name">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">扩展名</label>
+        <div class="layui-input-block">
+            <input type="text" name="exts" lay-filter="exts" lay-verify="required" lay-reqtext="扩展名不能为空" maxlength="10"  placeholder="请输入扩展名"
+ class="layui-input" id="exts">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label ">MD5</label>
+        <div class="layui-input-block">
+            <input type="text" name="md5" lay-filter="md5" maxlength="50"  placeholder="请输入MD5"
+ class="layui-input" id="md5">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">存储路径</label>
+        <div class="layui-input-block">
+            <input type="text" name="path" lay-filter="path" lay-verify="required" lay-reqtext="存储路径不能为空" maxlength="200"  placeholder="请输入存储路径"
+ class="layui-input" id="path">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label ">上传用户</label>
+        <div class="layui-input-block">
+        	<input type="number" name="uploadUserId" lay-filter="uploadUserId" maxlength="10"  placeholder="请输入上传用户"
+  step="0" class="layui-input" id="uploadUserId">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label ">上传时间</label>
+        <div class="layui-input-block">
+            <input type="text" name="uploadTime" lay-filter="uploadTime" maxlength="20"  placeholder="请输入上传时间"
+ class="layui-input" id="uploadTime">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label ">文件大小</label>
+        <div class="layui-input-block">
+        	<input type="number" name="size" lay-filter="size" maxlength="10"  placeholder="请输入文件大小"
+  step="0" class="layui-input" id="size">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label ">封面</label>
+        <div class="layui-input-block">
+            <input type="text" name="cover" lay-filter="cover" maxlength="200"  placeholder="请输入封面"
+ class="layui-input" id="cover">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label ">长度</label>
+        <div class="layui-input-block">
+        	<input type="number" name="length" lay-filter="length" maxlength="10"  placeholder="请输入长度"
+  step="0" class="layui-input" id="length">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label ">预览地址</label>
+        <div class="layui-input-block">
+            <input type="text" name="preFile" lay-filter="preFile" maxlength="200"  placeholder="请输入预览地址"
+ class="layui-input" id="preFile">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">状态</label>
+        <div class="layui-input-block">
+            <input type="text" name="status" lay-filter="status" lay-verify="required" lay-reqtext="状态不能为空" maxlength="1"  placeholder="请输入状态"
+ class="layui-input" id="status">
+        </div>
+    </div>
+    <div class="layui-hide">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="submitBtn" id="submitBtn">确认保存</button>
+        </div>
+    </div>

@@ -1,0 +1,48 @@
+#include("/view/include/form.html")
+#@layout()
+
+#define main() 
+	<div class="layui-form-item">
+        <label class="layui-form-label required">所属模块</label>
+        <div class="layui-input-block">
+             <select name="moduleId" url="#(CONTEXT)dev/module/slist" lay-filter="moduleId" lay-verify="required" lay-reqtext="模块不能为空"></select>
+        </div>
+    </div>                
+    <div class="layui-form-item">
+        <label class="layui-form-label required">模型名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" lay-verify="required" maxlength="50" lay-reqtext="模型名称不能为空" placeholder="请输入模块名称" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">数据库表</label>
+        <div class="layui-input-block">
+            <select name="tables" url="#(CONTEXT)dev/database/tables" idField="name" textField="comment" lay-verify="required" lay-reqtext="数据表不能为空" lay-filter="tables"></select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">业务类型</label>
+        <div class="layui-input-block">
+             <!-- 
+             <select name="moduleId" url="#(CONTEXT)dev/module/slist" lay-filter="moduleId"></select>
+        	 -->
+        	 <select name="type" lay-filter="type">
+        	  <option value="c" selected>通用</option>
+        	  <option value="t">树形</option>
+        	  </select>
+
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">状态</label>
+        <div class="layui-input-block">
+            <input type="radio" name="status" value="1" title="启用" checked="checked">
+            <input type="radio" name="status" value="0" title="禁用">
+        </div>
+    </div>
+    <div class="layui-hide">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="submitBtn" id="submitBtn">确认保存</button>
+        </div>
+    </div>
+#end

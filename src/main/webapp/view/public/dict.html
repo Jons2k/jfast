@@ -1,0 +1,21 @@
+#for(d : list)
+	#if(d.type == 'd')
+	function dict_#(d.code.toLowerCase())(values){
+		if(values == null || values == "") return "";
+		
+		var data = {};
+		#for(dd : list)
+			#if(dd.pid == d.id)
+		data["#(dd.code.toLowerCase())"] = "#(dd.title)";
+			#end
+		#end
+		var vv = values.split(',');
+		var ret = '';
+		for(var i=0;i < vv.length;i++){
+			ret += ',' + data[vv[i].toLowerCase()];
+		}
+		return ret.length > 0 ? ret.substring(1):'';
+	}
+	
+	#end
+#end

@@ -1,0 +1,83 @@
+#(SHARP)include("/view/include/front.html")
+#(SHARP)@layout()
+
+#(SHARP)define main()
+<div class="layuimini-container">
+    <div class="layuimini-main">
+    <!-- 
+    <fieldset class="table-search-fieldset">
+		<legend>搜索信息</legend>
+		<div style="margin: 10px 10px 10px 10px">
+			<form class="layui-form layui-form-pane" action="" id="searchForm"
+				lay-filter="searchForm">
+				<div class="layui-form-item">    
+			        <div class="layui-inline">
+						<label class="layui-form-label">名称</label>
+						<div class="layui-input-inline">
+							<input type="text" name="title" autocomplete="off" class="layui-input">
+						</div>
+					</div> 
+			        <div class="layui-inline">
+						<label class="layui-form-label">状态</label>
+						<div class="layui-input-inline">
+							<select name="status" id="status" url="#(CONTEXT)sys/dict/select?dict=status" idField="code" lay-filter="status"></select>					
+						</div>
+					</div> 
+					<div class="layui-inline">
+						<button type="submit" class="layui-btn layui-btn-primary"
+							lay-submit lay-filter="chart-search-btn">
+							<i class="layui-icon"></i> 搜 索
+						</button>
+	      				<button type="reset" class="layui-btn layui-btn-primary">清空</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</fieldset>
+     -->
+     	#if(vo.type == 'table')
+     	<table id="chartTable" lay-filter="chartTable"></table>
+     	#else
+    	<div id="chartDiv" style="width: 100%;min-height:500px"></div>   
+     	#end    
+    </div>
+</div>
+#(SHARP)end
+
+#(SHARP)define script()
+<script>
+    layui.use(['echarts','echartsTheme','echartsHelper','form'], function () {
+        var $ = layui.jquery,
+        	echartsHelper = layui.echartsHelper,
+        	form = layui.form,
+            layuimini = layui.layuimini;
+        var options = {
+        		#if(vo.type == 'table')
+            	ele:'chartTable',
+        		#else
+        		ele:'chartDiv',
+        		#end
+            	title:'#(vo.title)',
+            	type:'#(vo.type)',
+            	mult:false,
+            	data:'#(SHARP)(CONTEXT)dev/dataset/data?id=#(vo.dsId)',
+        		#if(vo.type != 'table')
+                style:{series:[{name:'#(vo.title)'}]}
+        		#end
+        };
+        
+        function initChart(param){
+        	options.param = param;
+        	echartsHelper.init(options);
+        }
+        
+        form.on('submit(chart-search-btn)', function (data) {
+        	options.data = '#(SHARP)(CONTEXT)dev/dataset/data?id=#(vo.dsId)';
+        	initChart(data.field);
+            return false;
+        });
+        
+        initChart({});
+    });      
+</script>
+#(SHARP)end

@@ -1,0 +1,38 @@
+#include("/view/include/form.html")
+#@layout()
+
+#define main()           
+    <div class="layui-form-item">
+        <label class="layui-form-label required">模型名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" lay-verify="required" maxlength="50" readonly class="layui-input">
+        </div>
+    </div>          
+    <div class="layui-form-item">
+        <label class="layui-form-label required">模型代码</label>
+        <div class="layui-input-block">
+            <input type="text" name="code" lay-verify="required" maxlength="50" readonly class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">数据库表</label>
+        <div class="layui-input-block">
+            <input type="text" name="tables" lay-verify="required" maxlength="50" readonly class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">生成内容</label>
+        <div class="layui-input-block">
+      	<input type="checkbox" name="content[list]" title="列表页面" checked>
+      	<input type="checkbox" name="content[form]" title="表单页面" checked>
+      	<input type="checkbox" name="content[excel]" title="EXCEL模板">
+      	<input type="checkbox" name="menu[list]" title="管理菜单">
+      	<input type="checkbox" name="action" title="操作行为">
+        </div>
+    </div>
+    <div class="layui-hide">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="submitBtn" id="submitBtn">确认保存</button>
+        </div>
+    </div>
+#end

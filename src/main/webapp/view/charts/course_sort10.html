@@ -1,0 +1,78 @@
+#include("/view/include/front.html")
+#@layout()
+
+#define main()
+<div class="layuimini-container">
+    <div class="layuimini-main">
+    <!-- 
+    <fieldset class="table-search-fieldset">
+		<legend>搜索信息</legend>
+		<div style="margin: 10px 10px 10px 10px">
+			<form class="layui-form layui-form-pane" action="" id="searchForm"
+				lay-filter="searchForm">
+				<div class="layui-form-item">    
+			        <div class="layui-inline">
+						<label class="layui-form-label">名称</label>
+						<div class="layui-input-inline">
+							<input type="text" name="title" autocomplete="off" class="layui-input">
+						</div>
+					</div> 
+			        <div class="layui-inline">
+						<label class="layui-form-label">状态</label>
+						<div class="layui-input-inline">
+							<select name="status" id="status" url="sys/dict/select?dict=status" idField="code" lay-filter="status"></select>					
+						</div>
+					</div> 
+					<div class="layui-inline">
+						<button type="submit" class="layui-btn layui-btn-primary"
+							lay-submit lay-filter="chart-search-btn">
+							<i class="layui-icon"></i> 搜 索
+						</button>
+	      				<button type="reset" class="layui-btn layui-btn-primary">清空</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</fieldset>
+     -->
+     	<table id="chartTable" lay-filter="chartTable"></table>
+    </div>
+</div>
+#end
+
+#define script()
+<script>
+    layui.use(['echarts','echartsTheme','echartsHelper','form'], function () {
+        var $ = layui.jquery,
+        	echartsHelper = layui.echartsHelper,
+        	form = layui.form,
+            layuimini = layui.layuimini;
+        var options = {
+            	ele:'chartTable',
+            	title:'课程学习排行',
+            	type:'table',
+            	mult:false,
+            	data:'#(CONTEXT)dev/dataset/data?id=4',
+            	style:{
+            			cols: [[
+	                    	{type: "numbers", title: '排序', width: 50}
+	            	      ,{field: 'title', title: '课程名称', width:150}
+	            	      ,{field: 'value', title: '学习人数', width:100}
+	            	    ]]
+        			}
+        };
+        
+        function initChart(param){
+        	options.param = param;
+        	echartsHelper.init(options);
+        }
+        
+        form.on('submit(chart-search-btn)', function (data) {
+        	initChart(data.field);
+            return false;
+        });
+        
+        initChart({});
+    });      
+</script>
+#end

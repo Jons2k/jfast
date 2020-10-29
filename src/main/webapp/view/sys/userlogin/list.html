@@ -1,0 +1,44 @@
+#include("/view/include/list.html")
+#@layout()
+
+#define main()
+	#include("filter.html")
+	<script type="text/html" id="toolbar">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="ajax_select" url="delete"> 删除选择 </button>
+        </div>
+    </script>
+	<script type="text/html" id="tool">
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="ajax" url="delete">删除</a>
+    </script>
+		<script type="text/html" id="tpl_user">
+        	{{#(SHARP) if(d.user){ }}
+				{{= d.user.nickname }}
+        	{{#(SHARP) } }}
+    	</script>
+
+#end
+
+#define script()
+<script>
+    layui.use(['curd'], function () {
+        var $ = layui.jquery,
+            curd = layui.curd,
+            layuimini = layui.layuimini;
+            var listTable = curd.init({
+            elem: '#listTable',
+            url: '#(CONTEXT)#(_module)/#(_controller)/lists',
+            cols: [[
+                {type: "checkbox", width: 50, fixed: "left"},
+                {field: 'account', minWidth: 150, title: '账号'},
+                {field: 'ip', minWidth: 150, title: '登录IP'},
+                {field: 'loginTime', minWidth: 200, title: '登录时间'},
+                {field: 'userId', minWidth: 150, title: '登录用户', templet: '#tpl_user'},
+                {field: 'sessionId', minWidth: 300, title: 'Session'},
+                {field: 'logoutTime', minWidth: 200, title: '退出时间'},
+                {title: '操作', width: 100, templet: '#tool', fixed: "right", align: "center"}
+            ]]
+        });
+    });      
+</script>
+#end

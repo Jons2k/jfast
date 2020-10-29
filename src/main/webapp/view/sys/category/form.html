@@ -1,0 +1,39 @@
+
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">上级</label>
+        <div class="layui-input-inline">
+        	<select name="pid" id="pid" url="#(CONTEXT)sys/category/select" lay-filter="pid"></select>		
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">代码</label>
+        <div class="layui-input-inline">
+            <input type="text" name="code" lay-filter="code" lay-verify="required" lay-reqtext="代码不能为空" maxlength="50"  placeholder="请输入代码"
+ class="layui-input" id="code">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">名称</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" lay-filter="title" lay-verify="required" lay-reqtext="名称不能为空" maxlength="200"  placeholder="请输入名称"
+ class="layui-input" id="title">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">排序</label>
+        <div class="layui-input-inline">
+        	<input type="number" name="listSort" lay-filter="listSort" lay-verify="required" lay-reqtext="排序不能为空" maxlength="10"  placeholder="请输入排序"
+  class="layui-input" id="listSort" value="9">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">状态</label>
+        <div class="layui-input-inline">
+             <select name="status" id="status" #if(_action == "add") value="1" #end url="#(CONTEXT)sys/dict/select?dict=status" idField="code" lay-filter="status" lay-verify="required" lay-reqtext="状态不能为空" ></select>
+        </div>
+    </div>
+    <div class="layui-hide">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="submitBtn" id="submitBtn">确认保存</button>
+        </div>
+    </div>

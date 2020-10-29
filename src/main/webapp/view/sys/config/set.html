@@ -1,0 +1,101 @@
+#define attr(f)
+name="#(f.code)" #if(f.values == null) value="#(f.defaults)" #else value="#(f.values)" #end lay-filter="#(f.code)" lay-verify="required" lay-reqtext="#(f.title)不能为空" placeholder="请输入#(f.title)"
+#end
+
+#define field(f)
+<div class="layui-form-item">
+        <label class="layui-form-label required">#(f.title)</label>
+        <div class="layui-input-block">
+        #if(f.type == 'p')
+                <input type="text" #@attr(f) class="layui-input" readonly file="image" id="#(f.code)">
+        #else if(f.type == 'd')
+                <input type="text" #@attr(f) class="layui-input" readonly date="date" id="#(f.code)">
+        #else if(f.type == 'n')            
+        	<input type="number" #@attr(f) class="layui-input" id="#(f.code)">
+        #else  
+            <input type="text" #@attr(f) class="layui-input" id="#(f.code)">
+    	#end
+        </div>
+    </div>
+#end
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>layui</title>
+	#include("/view/include/inc.html")
+    #@css?()
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+<div class="layui-form layuimini-form">
+	<form class="layui-form" action="#(CONTEXT)sys/config/set" id="pageForm" lay-filter='pageForm'>
+	<div class="layui-tab">
+	  <ul class="layui-tab-title">
+	  #for(g:list)
+		#if(g.type == "g")
+	    <li #(for.first ? "class=\"layui-this\"" : "")>#(g.title)</li>
+		#end
+	  #end
+	  </ul>
+	  <div class="layui-tab-content">
+	  #for(g : list)
+		#if(g.type == "g")
+	    <div class="layui-tab-item #(for.first ? "layui-show" : "")">
+			#for(f : list)
+				#if(f.pid == g.id)#@field(f)
+				#end
+			#end
+		</div>
+		#end
+	  #end
+	  </div>
+	</div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="" lay-filter="submitBtn" id="submitBtn">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+            
+	</form>
+</div>
+</div>
+</div>
+<script src="#(STATICS)lib/layui-v2.5.5/layui.js?v=#(VERSION)" charset="utf-8"></script>
+<script src="#(STATICS)js/lay-config.js?v=#(VERSION)" charset="utf-8"></script>
+
+<script>
+    layui.use(['form', 'curd', 'element'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            curd = layui.curd,
+            $ = layui.$;
+
+        curd.initForm('#pageForm');
+        
+        //监听提交
+        form.on('submit(submitBtn)', function (data) {
+        	$.post($(data.form).attr('action'), data.field,function(res){
+        		if(res.code == '0'){
+        			layer.msg(res.msg,function (index) {    					
+    	                layer.close(index); // 关闭弹出层
+
+    	                window.location.reload();
+    	                
+                    });
+    			}else{
+    				layer.msg(res.msg,function (index) {    					
+    	                layer.close(index); // 关闭弹出层
+                    });
+    			}
+        	});
+
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

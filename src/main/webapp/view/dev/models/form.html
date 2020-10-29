@@ -1,0 +1,51 @@
+
+	<div class="layui-form-item">
+        <label class="layui-form-label required">所属模块</label>
+        <div class="layui-input-block">
+             <select name="moduleId" url="#(CONTEXT)dev/module/slist" lay-filter="moduleId"></select>
+        </div>
+    </div>                        
+    <div class="layui-form-item">
+        <label class="layui-form-label required">模型名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" lay-verify="required" maxlength="50" lay-reqtext="模型名称不能为空" placeholder="请输入模块名称" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">数据表</label>
+        <div class="layui-input-block">
+            <input type="text" name="tables" lay-verify="required" maxlength="20" lay-reqtext="数据表不能为空" placeholder="请输入数据表" value="" class="layui-input">
+        	<tip>字母数字组合，必须以字母开头</tip>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">模型代码</label>
+        <div class="layui-input-block">
+            <input type="text" name="code" lay-verify="required" maxlength="20" lay-reqtext="模型代码不能为空" placeholder="请输入模块代码" value="" class="layui-input">
+        	<tip>字母数字组合，必须以字母开头</tip>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">业务类型</label>
+        <div class="layui-input-block">
+             <select name="type" id="type" #if(_action == "add") value="c" #end url="#(CONTEXT)sys/dict/select?dict=model_type" idField="code" lay-filter="type" lay-verify="required" lay-reqtext="类型不能为空" ></select>					
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">主键字段</label>
+        <div class="layui-input-block">
+            <input type="text" name="pkField"  maxlength="100"  placeholder="主键字段" value="" class="layui-input">
+        	<tip>数据类模型必填，组合主键用英文,隔开</tip>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">状态</label>
+        <div class="layui-input-block">
+           <select name="status" id="status" #if(_action == "add") value="1" #end url="#(CONTEXT)sys/dict/select?dict=status" idField="code" lay-filter="status" lay-verify="required" lay-reqtext="状态不能为空" value="1"></select>					
+		</div>
+    </div>
+    <div class="layui-hide">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="submitBtn" id="submitBtn">确认保存</button>
+        </div>
+    </div>

@@ -1,0 +1,47 @@
+<fieldset class="table-search-fieldset">
+	<legend>搜索信息</legend>
+	<div style="margin: 10px 10px 10px 10px">
+		<form class="layui-form layui-form-pane" action="" id="searchForm"
+			lay-filter="searchForm">
+			<div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">模块</label>
+                    <div class="layui-input-inline">
+                   		<select name="moduleId" id="moduleId" url="#(CONTEXT)dev/module/slist" lay-filter="moduleId" affect="#modelId" lay-search></select>
+                    </div>
+                </div>
+		        <div class="layui-inline">
+					<label class="layui-form-label">所属模型</label>
+					<div class="layui-input-inline">
+        				<select name="modelId" id="modelId" url="#(CONTEXT)dev/models/slist" depend="#moduleId" lay-filter="modelId" lay-search></select>					
+					</div>
+				</div>        
+		        <div class="layui-inline">
+					<label class="layui-form-label">字段</label>
+					<div class="layui-input-inline">
+        				<select name="fieldId" id="fieldId" url="#(CONTEXT)dev/field/slist" lay-filter="fieldId" lay-search></select>					
+					</div>
+				</div>        
+		        <div class="layui-inline">
+					<label class="layui-form-label">验证类型</label>
+					<div class="layui-input-inline">
+        				<select name="type" id="type" url="#(CONTEXT)sys/dict/select?dict=validation_type" idField="code" lay-filter="type"></select>					
+					</div>
+				</div> 
+		        <div class="layui-inline">
+					<label class="layui-form-label">验证规则</label>
+					<div class="layui-input-inline">
+						<input type="text" name="rule" id="rule" autocomplete="off" class="layui-input">
+					</div>
+				</div> 
+				<div class="layui-inline">
+					<button type="submit" class="layui-btn layui-btn-primary"
+						lay-submit lay-filter="data-search-btn">
+						<i class="layui-icon"></i> 搜 索
+					</button>
+      				<button type="reset" class="layui-btn layui-btn-primary">清空</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</fieldset>

@@ -1,0 +1,60 @@
+
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">应用名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" lay-filter="title" lay-verify="required" lay-reqtext="应用名称不能为空" maxlength="200"  placeholder="请输入应用名称"
+ class="layui-input" id="title">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">应用类型</label>
+        <div class="layui-input-inline">
+            <select name="type" id="type" url="#(CONTEXT)sys/dict/select?dict=app_type" idField="code" lay-filter="type" lay-verify="required" lay-reqtext="字段类型不能为空"></select>
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">应用地址</label>
+        <div class="layui-input-block">
+            <input type="text" name="url" lay-filter="url" lay-verify="required" lay-reqtext="应用地址不能为空" maxlength="50"  placeholder="请输入应用地址"
+ class="layui-input" id="url">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label ">创建时间</label>
+        <div class="layui-input-inline">
+            <input type="text" name="addTime" date="datetime" lay-filter="addTime" autocomplete="off" maxlength="20"  placeholder="请输入创建时间"
+ class="layui-input" id="addTime">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">排序</label>
+        <div class="layui-input-inline">
+        	<input type="number" name="listSort" lay-filter="listSort" lay-verify="required" lay-reqtext="排序不能为空" maxlength="10"  placeholder="请输入排序"
+  step="0" class="layui-input" id="listSort">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">状态</label>
+        <div class="layui-input-inline">
+			<select name="status" id="status" #if(_action == "add") value="1" #end url="#(CONTEXT)sys/dict/select?dict=status" idField="code" lay-filter="status" lay-verify="required" lay-reqtext="状态不能为空"></select>					
+		</div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">图标</label>
+        <div class="layui-input-inline">
+            <input type="text" name="icon" lay-filter="icon" maxlength="20"  placeholder="请输入图标" class="layui-input" id="icon">
+        </div>
+    	<div class="layui-form-mid layui-word-aux"><a href="#(STATICS)page/icon.html" target="_blank">可用图标</a></div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label ">应用说明</label>
+        <div class="layui-input-block">
+            <textarea  cols="100" rows="3" name="comment" lay-filter="comment" maxlength="65535"  placeholder="请输入应用说明"
+ class="layui-textarea" id="comment"></textarea>
+        </div>
+    </div>
+    <div class="layui-hide">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="submitBtn" id="submitBtn">确认保存</button>
+        </div>
+    </div>

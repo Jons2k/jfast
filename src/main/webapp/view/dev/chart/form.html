@@ -1,0 +1,58 @@
+
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">分类</label>
+        <div class="layui-input-block">
+            <select id="cateId" name="cateId" url="#(CONTEXT)sys/category/slist" lay-filter="cateId" affect="#dsId"  lay-search lay-verify="required" lay-reqtext="分类不能为空" ></select>					
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">代码</label>
+        <div class="layui-input-block">
+            <input type="text" name="code" lay-filter="code" lay-verify="required" lay-reqtext="代码不能为空"  maxlength="50"  placeholder="请输入代码"
+ class="layui-input" id="code">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">名称</label>
+        <div class="layui-input-block">
+                <input type="text" name="title" lay-filter="title" lay-verify="required" lay-reqtext="名称不能为空"  maxlength="100"  placeholder="请输入名称"
+ class="layui-input" id="title">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">数据源</label>
+        <div class="layui-input-inline">
+            <select id="dsId" name="dsId" url="#(CONTEXT)dev/dataset/slist" lay-filter="dsId" depend="#cateId" lay-search lay-verify="required" lay-reqtext="数据源不能为空" ></select>					
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">类型</label>
+        <div class="layui-input-inline">
+            <select id="type" name="type" url="#(CONTEXT)sys/dict/select?dict=chart_type" idField="code" lay-filter="type" lay-verify="required" lay-reqtext="类型不能为空" ></select>					
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label ">说明</label>
+        <div class="layui-input-block">
+            <textarea  cols="100" rows="3" name="comment" lay-filter="comment"  maxlength="200"  placeholder="请输入说明"
+ class="layui-textarea" id="comment"></textarea>
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">排序</label>
+        <div class="layui-input-inline">
+        	<input type="number" name="listSort" lay-filter="listSort" lay-verify="required" lay-reqtext="排序不能为空"  maxlength="11"  placeholder="请输入排序"
+  step="0" class="layui-input" id="listSort">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">状态</label>
+        <div class="layui-input-inline">
+            <select id="status" name="status" url="#(CONTEXT)sys/dict/select?dict=status" #if(_action == "add") value="1" #end idField="code" lay-filter="status" lay-verify="required" lay-reqtext="状态不能为空" ></select>					
+        </div>
+    </div>
+    <div class="layui-hide">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="submitBtn" id="submitBtn">确认保存</button>
+        </div>
+    </div>

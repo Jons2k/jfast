@@ -1,0 +1,40 @@
+#include("/view/include/form.html")
+#@layout()
+
+#define main()
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">角色代码</label>
+        <div class="layui-input-inline">
+            <input type="text" name="code" lay-filter="code" lay-verify="required" lay-reqtext="角色代码不能为空" maxlength="50"  placeholder="请输入角色代码"
+ class="layui-input" id="code">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">角色名称</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" lay-filter="title" lay-verify="required" lay-reqtext="角色名称不能为空" maxlength="200"  placeholder="请输入角色名称"
+ class="layui-input" id="title">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">已授权用户</label>
+        <div class="layui-input-block">
+        	#for(u:selected)
+        	<input type="checkbox" name="user[#(u.id)]" title="#(u.nickname)" checked>
+        	#end
+		</div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">未授权用户</label>
+        <div class="layui-input-block">
+        	#for(u:noselect)
+        	<input type="checkbox" name="user[#(u.id)]" title="#(u.nickname)">
+        	#end
+		</div>
+    </div>
+    <div class="layui-hide">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="submitBtn" id="submitBtn">确认保存</button>
+        </div>
+    </div>
+#end

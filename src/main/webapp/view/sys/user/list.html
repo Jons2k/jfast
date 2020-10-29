@@ -1,0 +1,64 @@
+#include("/view/include/list.html")
+#@layout()
+
+#define main()
+	#include("filter.html")
+	<script type="text/html" id="toolbar">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-sm" lay-event="form" url="add.html"> 添加 </button>
+            <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="ajax_select" url="delete"> 删除选择 </button>
+            <button class="layui-btn layui-btn-sm layui-btn-warm" lay-event="ajax_select" url="repass"> 重置密码 </button>
+        </div>
+    </script>
+	<script type="text/html" id="tool">
+        <a class="layui-btn layui-btn-xs " lay-event="form" url="edit.html">编辑</a>
+        <a class="layui-btn layui-btn-xs " lay-event="form" url="grant">授权</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="ajax" url="delete">删除</a>
+    </script>
+		<script type="text/html" id="tpl_status">
+        	{{= dict_status(d.status) }}
+    	</script>
+		<script type="text/html" id="tpl_depart">
+        	{{#(SHARP) if(d.depart){ }}
+				{{= d.depart.title }}
+        	{{#(SHARP) } }}
+    	</script>
+		<script type="text/html" id="tpl_roles">
+        	{{#(SHARP) if(d.roles){ 
+				var roles = '';
+				for(var i=0;i<d.roles.length;i++){
+					roles += ','+d.roles[i].title;
+				}
+				if(roles.length > 1) roles = roles.substring(1);
+			}}
+				{{= roles }}
+        	{{#(SHARP) } }}
+    	</script>
+
+#end
+
+#define script()
+<script>
+    layui.use(['curd'], function () {
+        var $ = layui.jquery,
+            curd = layui.curd,
+            layuimini = layui.layuimini;
+        var listTable = curd.init({
+            elem: '#listTable',
+            url: '#(CONTEXT)#(_module)/#(_controller)/lists',
+            cols: [[
+                {type: "checkbox", width: 50, fixed: "left"},
+                {field: 'account', minWidth: 150, title: '账号'},
+                {field: 'nickname', minWidth: 200, title: '昵称'},
+                {field: 'email', minWidth: 150, title: '邮箱'},
+                {field: 'phone', minWidth: 150, title: '手机号'},
+                {field: 'departId', minWidth: 200, title: '所在部门', templet: '#tpl_depart'},
+                {field: 'roles', minWidth: 200, title: '角色', templet: '#tpl_roles'},
+                {field: 'createTime', minWidth: 200, title: '创建时间'},
+                {field: 'status', minWidth: 100, title: '状态', templet: '#tpl_status'},
+                {title: '操作', width: 200, templet: '#tool', fixed: "right", align: "center"}
+            ]]
+        });
+    });      
+</script>
+#end

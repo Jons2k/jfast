@@ -1,0 +1,59 @@
+#include("/view/include/list.html")
+#@layout()
+
+#define main()
+	#include("filter.html")
+
+    	<script type="text/html" id="toolbar">
+            <div class="layui-btn-container">
+                <button class="layui-btn layui-btn-sm" lay-event="form" url="add.html"> 添加模型 </button>
+                <button class="layui-btn layui-btn-sm" lay-event="form" url="table.html"> 导入表 </button>
+                <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="ajax_select" url="delete"> 删除选择</button>
+            </div>
+        </script>
+    	<script type="text/html" id="tool">
+            <a class="layui-btn layui-btn-xs " lay-event="form" url="edit.html">编辑</a>
+            <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="form" url="gen.html">生成代码</a>
+            <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="view" url="sqls">SQL</a>
+            <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="ajax" url="refresh">刷新表结构</a>
+            <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="ajax" url="delete">删除</a>
+        </script>
+        <script type="text/html" id="tpl_module">
+  			{{#(SHARP)  if(d.module){ }}
+    			{{ d.module.title }}
+  			{{#(SHARP)  } }} 
+		</script>
+		<script type="text/html" id="tpl_status">
+        	{{= dict_status(d.status) }}
+    	</script>
+		<script type="text/html" id="tpl_type">
+        	{{= dict_model_type(d.type) }}
+    	</script>
+
+#end
+
+#define script()
+<script>
+    layui.use(['curd'], function () {
+        var $ = layui.jquery,
+            curd = layui.curd,
+            layuimini = layui.layuimini;
+
+        var listTable = curd.init({
+            elem: '#listTable',
+            url: '#(CONTEXT)#(_module)/#(_controller)/lists',
+            cols: [[
+                {type: "checkbox", width: 50, fixed: "left"},
+                {field: 'moduleId', minWidth: 100, title: '模块', templet: '#tpl_module'},
+                {field: 'title', minWidth: 100, title: '名称'},
+                {field: 'code', minWidth: 150, title: '代码', sort: true},
+                {field: 'tables', minWidth: 200, title: '数据表'},
+                {field: 'type', minWidth: 100, title: '类型', templet:"#tpl_type"},
+                {field: 'status', minWidth: 100, title: '状态', templet:"#tpl_status"},
+                {title: '操作', width: 350, templet: '#tool', fixed: "right", align: "center"}
+            ]]
+        });
+    });
+       
+</script>
+#end

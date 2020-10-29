@@ -1,0 +1,42 @@
+#include("/view/include/list.html")
+#@layout()
+
+#define main()
+	#include("filter.html")
+	<script type="text/html" id="toolbar">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-sm" lay-event="form" url="add.html"> 添加 </button>
+            <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="ajax_select" url="delete"> 删除选择 </button>
+        </div>
+    </script>
+	<script type="text/html" id="tool">
+        <a class="layui-btn layui-btn-xs " lay-event="form" url="edit.html">编辑</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="ajax" url="delete">删除</a>
+    </script>
+		<script type="text/html" id="tpl_status">
+        	{{= dict_status(d.status) }}
+    	</script>
+
+#end
+
+#define script()
+<script>
+    layui.use(['curd'], function () {
+        var $ = layui.jquery,
+            curd = layui.curd,
+            layuimini = layui.layuimini;
+            var listTable = curd.tree({
+            elem: '#listTable',
+            url: '#(CONTEXT)#(_module)/#(_controller)/slist',
+            cols: [[
+                {type: "checkbox", width: 50, fixed: "left"},
+                {field: 'title', minWidth: 200, title: '名称'},
+                {field: 'code', minWidth: 200, title: '代码'},
+                {field: 'listSort', minWidth: 200, title: '排序'},
+                {field: 'status', minWidth: 200, title: '状态', templet: '#tpl_status'},
+                {title: '操作', width: 150, templet: '#tool', fixed: "right", align: "center"}
+            ]]
+        });
+    });      
+</script>
+#end

@@ -1,0 +1,27 @@
+#define layout()
+<!DOCTYPE html>
+<html>
+<head>
+    <title>layui</title>
+	#include("/view/include/inc.html")
+    #@css?()
+</head>
+<body>
+<div class="layui-form layuimini-form">
+	<form class="layui-form" action="#(CONTEXT)#(_module)/#(_controller)/#(_action)" id="pageForm" lay-filter='pageForm'>
+	#@main()
+    
+	  <div class="layui-form-item">
+	    <div class="layui-input-block">
+	      <button class="layui-btn" lay-submit lay-filter="submitBtn">立即提交</button>
+	      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+	    </div>
+	  </div>
+	</form>
+</div>
+<script src="#(STATICS)lib/layui-v2.5.5/layui.js?v=#(VERSION)" charset="utf-8"></script>
+<script src="#(STATICS)js/lay-config.js?v=#(VERSION)" charset="utf-8"></script>
+#@script()
+</body>
+</html>
+#end

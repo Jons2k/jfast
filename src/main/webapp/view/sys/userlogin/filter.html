@@ -1,0 +1,33 @@
+<fieldset class="table-search-fieldset">
+	<legend>搜索信息</legend>
+	<div style="margin: 10px 10px 10px 10px">
+		<form class="layui-form layui-form-pane" action="" id="searchForm"
+			lay-filter="searchForm">
+			<div class="layui-form-item">
+		        <div class="layui-inline">
+					<label class="layui-form-label">账号</label>
+					<div class="layui-input-inline">
+						<input type="text" name="account" id="account" autocomplete="off" class="layui-input">
+					</div>
+				</div>     
+		        <div class="layui-inline">
+					<label class="layui-form-label">登录时间</label>
+					<div class="layui-input-inline">
+						<input type="text" name="startTime" id="startTime" date="datetime" autocomplete="off" class="layui-input">
+					</div>
+    				<div class="layui-form-mid">-</div>
+					<div class="layui-input-inline">
+					 <input type="text" name="endTime" id="endTime" date="datetime" autocomplete="off" class="layui-input">
+					</div>
+				</div> 
+				<div class="layui-inline">
+					<button type="submit" class="layui-btn layui-btn-primary"
+						lay-submit lay-filter="data-search-btn">
+						<i class="layui-icon"></i> 搜 索
+					</button>
+      				<button type="reset" class="layui-btn layui-btn-primary">清空</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</fieldset>

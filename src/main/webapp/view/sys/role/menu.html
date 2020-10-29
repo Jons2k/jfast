@@ -1,0 +1,75 @@
+#include("/view/include/form.html")
+#@layout()
+
+#define main()
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">角色名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" lay-filter="title" lay-verify="required" lay-reqtext="角色名称不能为空" maxlength="200"  placeholder="请输入角色名称"
+ class="layui-input" id="title">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">菜单列表</label>
+        <div class="layui-input-block">	
+        	<input type="hidden" name="menus" value="" id="menus"/>
+        	<div id="menuTree"></div>
+        </div>
+    </div>
+    <div class="layui-hide">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="submitBtn" id="submitBtn">确认保存</button>
+        </div>
+    </div>
+#end
+
+
+#define js()
+<script>
+    layui.use(['form', 'tree'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            tree = layui.tree,
+            $ = layui.$;
+        
+        $.get("#(CONTEXT)sys/role/menus?roleId=#(id)",function(res){
+    		if(res.code == '0'){
+    			tree.render({
+    				id:"menuId",
+    		    	elem: "#menuTree",
+    		    	showCheckbox:true,
+    		    	data:res.data 
+    		    });
+    		}
+    	});
+        
+        window.onSubmit = function(data){
+        	var datas = tree.getChecked('menuId');
+        	var ids = '';
+        	for(var i=0;i<datas.length;i++){
+        		ids += ','+datas[i].id;
+        	}
+        	if(ids.length >1) data.menus = ids.substring(1);
+        	
+        	$.post("#(CONTEXT)sys/role/menu", data,function(res){
+        		if(res.code == '0'){
+        			layer.msg(res.msg,function (index) {    					
+    	                layer.close(index); // 关闭弹出层
+
+    	                parent.actionSuccess();
+    	                
+    	                //关闭窗口
+    	                var iframeIndex = parent.layer.getFrameIndex(window.name);
+    	                parent.layer.close(iframeIndex);
+    	                
+                    });
+    			}else{
+    				layer.msg(res.msg,function (index) {    					
+    	                layer.close(index); // 关闭弹出层
+                    });
+    			}
+        	});
+        }
+    });
+</script>
+#end

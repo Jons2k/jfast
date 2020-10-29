@@ -1,0 +1,32 @@
+#include("/view/include/form.html")
+#@layout()
+
+#define main()
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">账号</label>
+        <div class="layui-input-block">
+            <input type="text" name="account" readonly lay-filter="account" lay-verify="required" lay-reqtext="账号不能为空" min-length="2" maxlength="50"  placeholder="请输入账号"
+ class="layui-input" id="account">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">昵称</label>
+        <div class="layui-input-block">
+            <input type="text" name="nickname" readonly lay-filter="nickname" lay-verify="required" lay-reqtext="昵称不能为空" maxlength="100"  placeholder="请输入昵称"
+ class="layui-input" id="nickname">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">角色</label>
+        <div class="layui-input-block">
+        	#for(r:roles)
+        	<input type="checkbox" name="role[#(r.id)]" title="#(r.title)" #for(s:selects) #if(s.id==r.id) checked #end #end>
+        	#end
+		</div>
+    </div>
+    <div class="layui-hide">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="submitBtn" id="submitBtn">确认保存</button>
+        </div>
+    </div>
+#end

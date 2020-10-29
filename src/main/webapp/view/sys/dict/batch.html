@@ -1,0 +1,38 @@
+#include("/view/include/form.html")
+#@layout()
+
+#define main()	
+   	<input type="hidden" name="type" value="v" />
+   	<input type="hidden" name="pid" value="#(pid)" />
+   	
+   	#for(i=0;i<5;i++)
+   	<div class="layui-form-item">
+	  <div class="layui-inline">
+	        <label class="layui-form-label  required ">代码</label>
+	        <div class="layui-input-block">
+	            <input type="text" name="code_#(i)" lay-reqtext="代码不能为空" maxlength="50"  placeholder="请输入代码"
+	 class="layui-input" id="code">
+	        </div>
+	    </div>   	
+	  <div class="layui-inline">
+	        <label class="layui-form-label  required ">文本</label>
+	        <div class="layui-input-block">
+	            <input type="text" name="title_#(i)" lay-reqtext="文本不能为空" maxlength="200"  placeholder="请输入文本"
+	 class="layui-input" id="title">
+	        </div>
+	    </div>	   	
+	  <div class="layui-inline">
+	        <label class="layui-form-label  required ">排序</label>
+	        <div class="layui-input-block">
+	            <input type="number" name="listSort_#(i)" lay-reqtext="排序不能为空" max="9999" value="#(i+1)" placeholder="请输入文本"
+	 class="layui-input" id="listSort">
+	        </div>
+	    </div>
+	</div>
+	#end
+    <div class="layui-hide">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="submitBtn" id="submitBtn">确认保存</button>
+        </div>
+    </div>
+#end

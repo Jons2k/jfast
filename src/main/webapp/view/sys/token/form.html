@@ -1,0 +1,47 @@
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">代码</label>
+        <div class="layui-input-inline">        
+            <input type="text" name="code" lay-filter="code" id="code" lay-verify="required" lay-reqtext="代码不能为空"  maxlength="50"  placeholder="请输入代码"
+ class="layui-input">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label ">用户</label>
+        <div class="layui-input-inline">        
+        	<input type="number" name="userId" lay-filter="userId" id="userId"  maxlength="11"  placeholder="请输入用户"
+  step="0" class="layui-input">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label ">应用</label>
+        <div class="layui-input-inline">        
+        	<input type="number" name="appId" lay-filter="appId" id="appId"  maxlength="11"  placeholder="请输入应用"
+  step="0" class="layui-input">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label ">IP地址</label>
+        <div class="layui-input-inline">        
+            <input type="text" name="ip" lay-filter="ip" id="ip"  maxlength="50"  placeholder="请输入IP地址"
+ class="layui-input">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label ">创建时间</label>
+        <div class="layui-input-inline">        
+                <input type="text" name="createTime" lay-filter="createTime" id="createTime"  maxlength="20"  placeholder="请输入创建时间"
+ class="layui-input" readonly date="datetime" >
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label ">过期时间</label>
+        <div class="layui-input-inline">        
+                <input type="text" name="expireTime" lay-filter="expireTime" id="expireTime"  maxlength="20"  placeholder="请输入过期时间"
+ class="layui-input" readonly date="datetime" >
+        </div>
+    </div>
+    <div class="layui-hide">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="submitBtn" id="submitBtn">确认保存</button>
+        </div>
+    </div>

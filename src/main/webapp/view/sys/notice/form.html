@@ -1,0 +1,20 @@
+
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">标题</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" lay-filter="title" lay-verify="required" lay-reqtext="标题不能为空" maxlength="500"  placeholder="请输入标题"
+ class="layui-input" id="title">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label  required ">内容</label>
+        <div class="layui-input-block">
+            <textarea  cols="100" rows="3" name="content" lay-filter="content" lay-verify="required" lay-reqtext="内容不能为空" maxlength="65535"  placeholder="请输入内容"
+ class="layui-textarea editor" id="content"></textarea>
+        </div>
+    </div>
+    <div class="layui-hide">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="submitBtn" id="submitBtn">确认保存</button>
+        </div>
+    </div>

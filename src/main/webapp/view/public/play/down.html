@@ -1,0 +1,30 @@
+#include("/view/include/front.html") 
+#@layout() 
+
+#define main()
+<div class="layuimini-container">
+	<div class="layuimini-main">
+		<div class="layui-row ">
+			<div class="layui-col-sm12 layui-col-md8 layui-col-md-offset2">
+				<div class="layui-card">
+					<div class="layui-card-header">
+						<i class="fa fa-warning icon"></i>文件详情
+					</div>
+					<div class="layui-card-body">
+						<div class="panel layui-bg-number">
+							<div class="panel-body">
+								<div class="panel-title">
+									<span class="label pull-right layui-bg-blue">#(file.name)</span>
+								</div>
+								<div class="panel-content">
+									<a href="#(CONTEXT)sys/file/down?id=#(vo.fileId)" target="_blank">点击下载</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+#end

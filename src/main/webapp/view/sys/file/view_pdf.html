@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>#(vo.title)</title>
+</head>
+<body>
+<iframe src="#(CONTEXT)statics/lib/pdfjs/viewer.html?file=#(UPLOAD)#(vo.path)" frameborder="0" width="100%" height="400" id="pdfContainer" name="pdfContainer"></iframe>
+</body>
+</html>
+<script type="text/javascript">
+window.onLoad = function(){
+	window['pdfContainer'].heigth = window.height;
+}
+</script>

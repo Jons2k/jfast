@@ -1,0 +1,56 @@
+#include("/view/include/list.html")
+#@layout()
+
+#define main()
+	<fieldset class="table-search-fieldset">
+	<legend>查询SQL</legend>
+	<div style="margin: 10px 10px 10px 10px">
+		<form class="layui-form layui-form-pane" action="" id="searchForm"
+			lay-filter="searchForm" method="post">
+			<div class="layui-form-item">
+		        <div class="layui-input-block">
+		            <textarea  cols="100" rows="3" name="sql" lay-filter="sql" placeholder="请输入查询SQL"
+		 				class="layui-textarea" id="sql">#(sql)</textarea>  
+		 		</div>
+		    </div>
+			<div class="layui-form-item">
+				<div class="layui-inline">
+					<button type="submit" class="layui-btn layui-btn-primary"
+						lay-submit>
+						<i class="layui-icon"></i> 查询
+					</button>
+      				<button type="reset" class="layui-btn layui-btn-primary">清空</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</fieldset>
+
+#end
+
+#define script()
+<script>
+    layui.use(['table'], function () {
+        var $ = layui.jquery,
+        	table = layui.table,
+            layuimini = layui.layuimini;
+        #if(data != null)
+        var listTable = table.render({
+            elem: '#listTable',
+            defaultToolbar: ['filter', 'exports', 'print', {
+                title: '提示',
+                layEvent: 'LAYTABLE_TIPS',
+                icon: 'layui-icon-tips'
+            }],
+            cols: [[
+                {type: "numbers", width: 50, fixed: "left", title: '行'}
+                #for(col : cols)
+                ,{field: '#(col)', title: '#(col)'}
+                #end
+            ]],
+            data:#(data)
+        });
+        #end
+    });      
+</script>
+#end

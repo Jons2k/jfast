@@ -1,0 +1,31 @@
+#define layout()
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="#(STATICS)lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="#(STATICS)css/public.css?v=#(VERSION)" media="all">
+    <script>
+    var APP = {
+    	CONTEXT: '#(CONTEXT)',
+    	MODULE: '#(_module)',
+    	CONTROLLER: '#(_controller)',
+    	ACTION: '#(_action)',
+    	VERSION: '1.0',	
+    };
+    </script>
+    #@css?()
+</head>
+<body>
+    #@main()
+<script src="#(STATICS)lib/layui-v2.5.5/layui.js?v=#(VERSION)" charset="utf-8"></script>
+<script src="#(STATICS)js/lay-config.js?v=#(VERSION)" charset="utf-8"></script>
+#@js?()
+#@script()
+</body>
+</html>
+#end

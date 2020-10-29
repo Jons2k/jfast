@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>layui</title>
+	#include("/view/include/inc.html")
+    #@css?()
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+	<div class="layui-tab">
+	  <ul class="layui-tab-title">
+	    <li class="layui-this">MySQL</li>
+	    <li>Oracle</li>
+	    <li>SQL Server</li>
+	    <li>版本记录</li>
+	    <li>数据流</li>
+	  </ul>
+	  <div class="layui-tab-content">
+	    <div class="layui-tab-item layui-show">
+			<pre class="layui-code">			
+			#(sqls.mysql)
+			</pre>
+		</div>
+	    <div class="layui-tab-item">
+			<pre class="layui-code">			
+			#(sqls.oracle)
+			</pre>
+		</div>
+	    <div class="layui-tab-item">
+			<pre class="layui-code">
+			#(sqls.sqlserver)
+			</pre>
+		</div>
+	    <div class="layui-tab-item">
+			<pre class="layui-code">
+			#(sqls.history)
+			</pre>
+		</div>
+	    <div class="layui-tab-item">
+			<pre class="layui-code">
+			#(sqls.pipe)
+			</pre>
+		</div>
+	</div>
+</div>
+</div>
+<script src="#(STATICS)lib/layui-v2.5.5/layui.js?v=#(VERSION)" charset="utf-8"></script>
+<script src="#(STATICS)js/lay-config.js?v=#(VERSION)" charset="utf-8"></script>
+
+<script>
+    layui.use([ 'element','code'], function () {
+        var $ = layui.$;
+        layui.code(); 
+    });
+</script>
+</body>
+</html>

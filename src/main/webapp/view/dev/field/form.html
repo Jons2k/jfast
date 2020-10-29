@@ -1,0 +1,99 @@
+
+   	<div class="layui-form-item">
+        <div class="layui-inline">
+           <label class="layui-form-label">模块</label>
+                   <div class="layui-input-inline">
+                   		<select name="moduleId" id="moduleId" url="#(CONTEXT)dev/module/slist" lay-filter="moduleId" affect="#modelId"></select>
+                    </div>
+         </div>
+		        <div class="layui-inline">
+					<label class="layui-form-label">所属模型</label>
+					<div class="layui-input-inline">
+						<select name="modelId" id="modelId" url="#(CONTEXT)dev/models/slist" lay-filter="modelId" depend="#moduleId"></select>					</div>
+				</div>
+    </div>
+   	<div class="layui-form-item">
+        <div class="layui-inline">
+        <label class="layui-form-label  required ">字段代码</label>
+        <div class="layui-input-block">
+			<input type="text" name="code" autocomplete="off" class="layui-input" lay-filter="code" lay-verify="required" lay-reqtext="字段代码不能为空" maxlength="50"  placeholder="请输入字段代码">
+		</div>
+    </div>
+        <div class="layui-inline">
+        <label class="layui-form-label  required ">字段名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" autocomplete="off" class="layui-input" lay-filter="title" lay-verify="required" lay-reqtext="字段名称不能为空" maxlength="100"  placeholder="请输入字段名称">
+        </div>
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <div class="layui-inline">
+        <label class="layui-form-label  required ">数据类型</label>
+        <div class="layui-input-block">						
+        	<select name="dbType" id="dbType" url="#(CONTEXT)sys/dict/select?dict=db_type" idField="code" lay-filter="dbType" lay-verify="required" lay-reqtext="数据类型不能为空"></select>					
+        </div>
+        </div>
+        <div class="layui-inline">
+        <label class="layui-form-label  required ">字段类型</label>
+        <div class="layui-input-block">						
+        	<select name="type" id="type" url="#(CONTEXT)sys/dict/select?dict=field_type" idField="code" lay-filter="type" lay-verify="required" lay-reqtext="字段类型不能为空"></select>					
+        </div>
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <div class="layui-inline">
+	        <label class="layui-form-label  required ">长度</label>
+	        <div class="layui-input-block">
+	            <input type="number" name="len" lay-filter="len" lay-verify="required" lay-reqtext="长度不能为空" maxlength="10"  placeholder="请输入长度"
+	 class="layui-input" id="len">
+	        </div>
+	    </div>
+        <div class="layui-inline">
+	        <label class="layui-form-label  required ">小数位</label>
+	        <div class="layui-input-block">
+	            <input type="number" name="scale" lay-filter="scale" maxlength="10" placeholder="请输入小数位"
+	 class="layui-input" id="scale">
+	        </div>
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label ">默认值</label>
+        <div class="layui-input-block">
+            <textarea  cols="100" rows="3" name="defaults" lay-filter="defaults" maxlength="100"  placeholder="请输入默认值"
+ class="layui-textarea"></textarea>
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label ">计算公式</label>
+        <div class="layui-input-block">
+            <textarea  cols="100" rows="3" name="calculate" lay-filter="calculate" maxlength="300"  placeholder="请输入计算公式"
+ class="layui-textarea"></textarea>
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <label class="layui-form-label ">参数</label>
+        <div class="layui-input-block">
+	            <input type="text" name="param" lay-filter="scale" maxlength="100" placeholder="字典代码，日期格式或者文件扩展名等"
+	 class="layui-input" id="param">
+        </div>
+    </div>
+   	<div class="layui-form-item">
+        <div class="layui-inline">
+        <label class="layui-form-label  required ">空值</label>
+        <div class="layui-input-block">        	
+        	<select name="nullable" id="nullable" url="#(CONTEXT)sys/dict/select?dict=boolean" idField="code" lay-filter="nullable" lay-verify="required" lay-reqtext="空值不能为空" value="1"></select>					
+        </div>
+    </div>
+        <div class="layui-inline">
+        <label class="layui-form-label  required ">排序</label>
+        <div class="layui-input-inline">
+        	<input type="number" name="listSort" lay-filter="listSort" lay-verify="required" lay-reqtext="排序不能为空" maxlength="10"  placeholder="请输入排序"
+  class="layui-input" id="listSort" value="9">
+        </div>
+        </div>
+    </div>
+<div class="layui-hide">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="submitBtn" id="submitBtn">确认保存</button>
+        </div>
+    </div>

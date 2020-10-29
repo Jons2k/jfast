@@ -1,0 +1,41 @@
+<fieldset class="table-search-fieldset">
+	<legend>搜索信息</legend>
+	<div style="margin: 10px 10px 10px 10px">
+		<form class="layui-form layui-form-pane" action="" id="searchForm"
+			lay-filter="searchForm">
+			<div class="layui-form-item">
+		        <div class="layui-inline">
+					<label class="layui-form-label">分类</label>
+					<div class="layui-input-inline">
+        				<select name="cateId" id="cateId" url="#(CONTEXT)sys/category/slist" lay-filter="cateId" lay-search></select>					
+					</div>
+				</div> 
+		        <div class="layui-inline">
+					<label class="layui-form-label">数据集代码</label>
+					<div class="layui-input-inline">
+						<input type="text" name="code" id="code" autocomplete="off" class="layui-input">
+					</div>
+				</div> 
+		        <div class="layui-inline">
+					<label class="layui-form-label">数据集名称</label>
+					<div class="layui-input-inline">
+						<input type="text" name="title" id="title" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+		        <div class="layui-inline">
+					<label class="layui-form-label">状态</label>
+					<div class="layui-input-inline">
+        				<select name="status" id="status" url="#(CONTEXT)sys/dict/select?dict=status" idField="code" lay-filter="status"></select>					
+					</div>
+				</div>        
+				<div class="layui-inline">
+					<button type="submit" class="layui-btn layui-btn-primary"
+						lay-submit lay-filter="data-search-btn">
+						<i class="layui-icon"></i> 搜 索
+					</button>
+      				<button type="reset" class="layui-btn layui-btn-primary">清空</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</fieldset>

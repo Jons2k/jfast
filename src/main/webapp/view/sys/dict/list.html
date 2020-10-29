@@ -1,0 +1,110 @@
+#include("/view/include/tree.html")
+#@layout()
+
+#define main()
+	#include("filter.html")
+	<script type="text/html" id="toolbar">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-sm" lay-event="form" url="add.html?type=c"> 添加分类 </button>
+            <button class="layui-btn layui-btn-sm" lay-event="form" url="add.html?type=d"> 添加字典 </button>
+        #if(dictId != null)
+        	<button class="layui-btn layui-btn-sm" lay-event="form" url="batch.html?pid=#(dictId)"> 添加值 </button>
+        #end            
+            <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="ajax_select" url="delete"> 删除选择 </button>
+        </div>
+    </script>
+	<script type="text/html" id="tool">
+        <a class="layui-btn layui-btn-xs " lay-event="form" url="edit.html?type=v">编辑</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="ajax" url="delete">删除</a>
+    </script>
+	<table class="layui-hide" id="listTable" lay-filter="listTable"></table>
+#end
+
+#define script()
+<script>
+        layui.use(['curd','treeNav', 'form'], function () {
+        	 var $ = layui.jquery,
+             curd = layui.curd,
+             treeNav = layui.treeNav,
+             form = layui.form,
+             layuimini = layui.layuimini;
+
+        treeNav.init({
+        	edit:['del'],
+        	click:function(obj){          		
+    			//字典节点执行刷新
+        		if(obj.data.field == 'd'){  
+            		window.location = "list.html?dictId="+obj.data.id;
+        		}else{
+        			loadForm(obj.data.id, 'c');
+        		}
+           },
+           operate: function(obj){
+        	   if(obj.type === 'del'){ //删除节点
+	       	      curd.ajax("delete?id="+obj.data.id);
+	       	   }
+        	   return false;
+        	}
+        });
+        
+        var listTable = curd.init({
+            elem: '#listTable',
+            url: '#(CONTEXT)sys/dict/lists?type=v#if(dictId!=null)&pid=#(dictId)#end',
+            cols: [[
+                {type: "checkbox", width: 50, fixed: "left"},
+                {field: 'code', minWidth: 200, title: '代码'},
+                {field: 'title', minWidth: 200, title: '文本'},
+                {field: 'listSort', minWidth: 200, title: '排序',sort: true},
+                {title: '操作', width: 150, templet: '#tool', fixed: "right", align: "center"}
+            ]]
+        });
+        
+        curd.initForm("#innerForm");
+        form.on('submit(inner)', function (data) {
+        	$.post($(data.form).attr('action'), data.field,function(res){
+        		if(res.code == '0'){
+        			layer.msg(res.msg,function (index) {    					
+    	                layer.close(index); // 关闭弹出层
+
+    	                window.reloadTable();
+    	                
+                    });
+    			}else{
+    				layer.msg(res.msg,function (index) {    					
+    	                layer.close(index); // 关闭弹出层
+                    });
+    			}
+        	});
+
+            return false;
+        });
+        
+        #if(dictId != null)
+        	loadForm("#(dictId)", 'd');
+        #end
+        
+        function loadForm(id, type){
+        	$.get("#(CONTEXT)#(_module)/#(_controller)/info?id="+id,function(res){
+       			if(res.code == '0'){
+       				form.val('innerForm', res.data);
+       				$('#legends').html(res.data.title);
+       				if(res.data.type == 'c'){
+       					$('#pid').attr("disabled","disabled");
+       				}else{
+       					$('#pid').removeAttr("disabled");
+       				}
+       			}else{
+       				layer.msg(res.msg,function (index) {    					
+       	                layer.close(index); // 关闭弹出层
+                    });
+       			}
+       		});
+        }
+        
+        window.actionSuccess = function(){
+        	window.location.reload();
+        	layer.closeAll();
+        }
+    });      
+</script>
+#end
