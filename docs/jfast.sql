@@ -199,7 +199,7 @@ CREATE TABLE `sys_application` (
 #
 
 /*!40000 ALTER TABLE `sys_application` DISABLE KEYS */;
-INSERT INTO `sys_application` VALUES (1,'开发','dev','i','2020-03-11 15:32:42','',9,'','1'),(2,'核心','sys','i','2020-03-11 15:32:42','',9,'','1');
+INSERT INTO `sys_application` VALUES (1,'开发','dev','i','2020-03-11 15:32:42','',8,'','1'),(2,'核心','sys','i','2020-03-11 15:32:42','',9,'','1');
 /*!40000 ALTER TABLE `sys_application` ENABLE KEYS */;
 
 #
