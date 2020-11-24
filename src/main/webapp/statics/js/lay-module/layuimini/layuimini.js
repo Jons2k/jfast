@@ -849,9 +849,9 @@ layui.define(["element", "jquery"], function (exports) {
             $.getJSON(clearUrl, function (data, status) {
                 layer.close(loading);
                 if (data.code != 1) {
-                    return layuimini.msg_error(data.msg);
-                } else {
                     return layuimini.msg_success(data.msg);
+                } else {
+                    return layuimini.msg_error(data.msg);
                 }
             }).fail(function () {
                 layer.close(loading);
