@@ -9,7 +9,7 @@ import org.pp.utils.SecurityUtil;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 
-public class NoticeService implements BaseService<Notice>{	
+public class NoticeService implements BaseService<Notice>{
 	public static Notice dao = new Notice().dao();
 	private String error = "";
 
@@ -20,19 +20,19 @@ public class NoticeService implements BaseService<Notice>{
 	 * @return boolean
 	 */
 	public boolean read(long id, long userId) {
-		Record r = Db.findFirst("SELECT * FROM sys_notice_read WHERE noticeId=? AND userId=?", id, userId);
+		Record r = Db.findFirst("SELECT * FROM sys_notice_read WHERE notice_id=? AND user_id=?", id, userId);
 		if(r == null) {
 			r = new Record();
-			r.set("noticeId", id);
-			r.set("userId", userId);
-			r.set("readTime", new Date());
+			r.set("notice_id", id);
+			r.set("user_id", userId);
+			r.set("read_time", new Date());
 			if(!Db.save("sys_notice_read", r)) {
 				return false;
 			}
 		}
-		return Db.update("UPDATE sys_notice SET readCount=readCount+1 WHERE id=?", id) > 0;
+		return Db.update("UPDATE sys_notice SET read_count=read_count+1 WHERE id=?", id) > 0;
 	}
-	
+
 	@Override
 	public boolean insert(Notice bean) {
 		bean.setAddTime(new Date());
@@ -40,7 +40,7 @@ public class NoticeService implements BaseService<Notice>{
 		bean.setReadCount(0l);
 		return bean.save();
 	}
-	
+
 	@Override
 	public String getError() {
 		return error;
@@ -49,7 +49,7 @@ public class NoticeService implements BaseService<Notice>{
 	public void setError(String error) {
 		this.error = error;
 	}
-	
+
 	@Override
 	public Notice getModel() {
 		return dao;
