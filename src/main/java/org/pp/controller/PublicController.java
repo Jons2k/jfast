@@ -67,7 +67,7 @@ public class PublicController extends BaseController {
 				redirect = getRequest().getContextPath()+SecurityUtil.homeUrl();
 			}
 			renderJson(RestObject.success("登录成功",info, getRequest().getContextPath()+SecurityUtil.homeUrl()));
-			//renderJson(RestObject.success("登录成功",info, redirect));
+
 			removeSessionAttr("redirect");
 		}
 	}
