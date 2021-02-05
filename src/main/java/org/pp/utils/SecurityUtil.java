@@ -229,7 +229,7 @@ public class SecurityUtil {
 			m.setTitle(app.getTitle());
 			m.setIcon("fa fa-cubes"+app.getIcon("cubes"));
 			m.setChild(menus(user, app));
-			menuInfo.put("app_"+app.getListSort(), m);
+			menuInfo.put("app_"+app.getId(), m);
 		}
 		return menuInfo;
 	}
